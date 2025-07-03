@@ -44,10 +44,7 @@ where
         let mut buf = [0u8; 2];
 
         self.spi
-            .transaction(&mut [
-                Operation::Write(&[0x83]),
-                Operation::Read(&mut buf),
-            ])
+            .transaction(&mut [Operation::Write(&[0x83]), Operation::Read(&mut buf)])
             .map_err(Error::Spi)?;
 
         let raw = u16::from_be_bytes(buf);
