@@ -21,6 +21,7 @@ pub enum Error<SPI> {
 }
 
 /// MT6816 Driver
+///
 /// Requires MODE_3 (CPOL=1, CPHA=1) SPI to exchange data.
 pub struct Mt6816<SPI>
 where
