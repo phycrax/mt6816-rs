@@ -7,7 +7,7 @@ license = "MIT OR Apache-2.0"
 repository = "https://github.com/phycrax/mt6816-rs"
 documentation = "https://docs.rs/mt6816/"
 description = "Driver for MT6816 SPI Magnetic Encoder / Angle sensor"
-keywords = ["magnetic", "encoder", "angle", "sensor", "spi", "driver", "embedded-hal-driver"]
+keywords = ["encoder", "angle", "sensor", "spi", "embedded-hal-driver"]
 categories = ["embedded", "no-std"]
 
 [package.metadata.docs.rs]
