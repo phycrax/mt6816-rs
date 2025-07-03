@@ -3,7 +3,7 @@
 [![crates.io](https://img.shields.io/crates/d/mt6816.svg)](https://crates.io/crates/mt6816)
 [![crates.io](https://img.shields.io/crates/v/mt6816.svg)](https://crates.io/crates/mt6816)
 
-Rust driver for [MT6816](https://www.novosns.com/en/hall-angle-sensors-4017) 4-wire SPI Magnetic Encoder / Angle Sensor,
+Rust driver for [MT6816](https://www.novosns.com/en/hall-angle-sensors-4016) 4-wire SPI Magnetic Encoder / Angle Sensor,
 based on [embedded-hal](https://github.com/rust-embedded/embedded-hal) traits.
 
 ## License
