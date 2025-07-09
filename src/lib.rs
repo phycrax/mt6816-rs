@@ -47,10 +47,10 @@ where
         self.spi
             .transaction(&mut [Operation::Write(&[0x83]), Operation::Read(&mut buf)])
             .map_err(Error::Spi)?;
-        
+
         // Parity: bit 0, Magnet: bit 1, Angle: bits 2..=15
         let raw = u16::from_be_bytes(buf);
-        
+
         if !parity_check(raw) {
             return Err(Error::Parity);
         }
@@ -71,5 +71,5 @@ fn parity_check(data: u16) -> bool {
     data ^= data >> 4;
     data ^= data >> 2;
     data ^= data >> 1;
-    ((!data) & 1) != 0 
+    ((!data) & 1) != 0
 }
