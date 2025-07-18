@@ -48,28 +48,24 @@ where
             .transaction(&mut [Operation::Write(&[0x83]), Operation::Read(&mut buf)])
             .map_err(Error::Spi)?;
 
-        // Parity: bit 0, Magnet: bit 1, Angle: bits 2..=15
         let raw = u16::from_be_bytes(buf);
 
-        if !parity_check(raw) {
+        // Parity: bit 0, Magnet: bit 1, Angle: bits 2..=15
+        let parity_bit = (raw & (1 << 0)) != 0;
+        let magnet_bit = (raw & (1 << 1)) != 0;
+        let angle = raw >> 2;
+
+        // Calculate even parity over bits 1..15 (angle bits + magnet bit)
+        let calculated_parity = ((raw >> 1).count_ones() % 2) != 0;
+
+        if calculated_parity != parity_bit {
             return Err(Error::Parity);
         }
 
-        if (raw & (1 << 1)) != 0 {
+        if magnet_bit {
             return Err(Error::Magnet);
         }
 
-        Ok(raw >> 2)
+        Ok(angle)
     }
-}
-
-/// Calculate even parity for a 16-bit value.
-/// Returns 1 if the number of set bits is even, 0 otherwise.
-fn parity_check(data: u16) -> bool {
-    let mut data = data;
-    data ^= data >> 8;
-    data ^= data >> 4;
-    data ^= data >> 2;
-    data ^= data >> 1;
-    ((!data) & 1) != 0
 }
